@@ -34,14 +34,15 @@ export const getStaticProps = async (ctx) => {
     props: {
       recipe: items[0],
     },
+    revalidate: 5,
   };
 };
 export default function RecipeDetails({ recipe }) {
-  console.log(recipe);
   const { fields } = recipe;
   return (
     <div>
       <strong>{fields.title}</strong>::Recipe Details
+      <p>Cooking time: {fields.cookingTime}mins</p>
     </div>
   );
 }
