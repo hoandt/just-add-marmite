@@ -13,6 +13,7 @@ export const getStaticProps = async (ctx) => {
   };
 };
 export default function Recipes({ recipes }) {
+  console.log(recipes);
   return (
     <div className="recipe-list">
       {recipes.map((recipe) => (

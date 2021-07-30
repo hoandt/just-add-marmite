@@ -10,7 +10,6 @@ export const getStaticPaths = async (ctx) => {
   const { items } = await client.getEntries({
     content_type: "recipe",
   }); // your fetch function here
-
   const paths = items.map((item) => {
     return {
       params: {
@@ -23,15 +22,12 @@ export const getStaticPaths = async (ctx) => {
     fallback: false,
   };
 };
-// You should use getStaticProps when:
-//- The data required to render the page is available at build time ahead of a user’s request.
-//- The data comes from a headless CMS.
-//- The data can be publicly cached (not user-specific).
-//- The page must be pre-rendered (for SEO) and be very fast — getStaticProps generates HTML and JSON files, both of which can be cached by a CDN for performance.
-export const getStaticProps = async ({ params }) => {
+
+export const getStaticProps = async (ctx) => {
+  const slug = ctx.params.slug;
   const { items } = await client.getEntries({
     content_type: "recipe",
-    "fields.slug": params.slug,
+    "fields.slug": slug,
   }); // your fetch function here
 
   return {
@@ -41,11 +37,11 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 export default function RecipeDetails({ recipe }) {
+  console.log(recipe);
   const { fields } = recipe;
   return (
     <div>
-      {" "}
-      <strong>{fields.title}</strong> Recipe Details
+      <strong>{fields.title}</strong>::Recipe Details
     </div>
   );
 }
