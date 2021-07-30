@@ -20,7 +20,7 @@ export const getStaticPaths = async (ctx) => {
   });
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
