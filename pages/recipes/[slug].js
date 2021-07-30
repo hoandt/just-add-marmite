@@ -1,4 +1,5 @@
 import { createClient } from "contentful";
+import Skeleton from "../../components/Skeleton";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -38,6 +39,7 @@ export const getStaticProps = async (ctx) => {
   };
 };
 export default function RecipeDetails({ recipe }) {
+  if (!recipe) return <Skeleton />;
   const { fields } = recipe;
   return (
     <div>
