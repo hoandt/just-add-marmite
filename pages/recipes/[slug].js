@@ -31,6 +31,15 @@ export const getStaticProps = async (ctx) => {
     "fields.slug": slug,
   }); // your fetch function here
 
+  if (!items.length) {
+    return {
+      redirect: {
+        destination: "/",
+        permanant: false,
+      },
+    };
+  }
+
   return {
     props: {
       recipe: items[0],
